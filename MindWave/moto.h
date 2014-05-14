@@ -31,9 +31,7 @@ void MotoConfig()
   
   MotoSpeed.Current=MOTO_START_SPEED;
   MotoSpeed.Target=MOTO_START_SPEED;
-
   Timer3.initialize(MOTO_MIN_SPEED);
-
   void MotoISR(void);
   Timer3.attachInterrupt(MotoISR);
 }
@@ -41,13 +39,9 @@ void MotoConfig()
 ///////////////////////////////////////////////////////////////////
 void MotoSetSpeed()
 {
-    //noInterrupts();
     MotoSpeed.Target = MotoSpeed.SetTo;
     MotoSpeed.Current = MotoSpeed.SetFrom;
-    //DBG("SetTo="+String(MotoSpeed.SetTo)+", SetFrom="+String(MotoSpeed.SetFrom));
-    //DBG("Target="+String(MotoSpeed.Target)+", Current="+String(MotoSpeed.Current));
     Timer3.initialize(MotoSpeed.Current);
-    //interrupts();
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -91,12 +85,8 @@ void MotoDir(byte moto_dir)
 }
 
 ///////////////////////////////////////////////////////////////////
-static void MotoStep(bool level)
+static void MotoStep(void)
 {
-  /*
-    digitalWrite(_pin_MotoStep, level);
-  */
-  
   digitalWrite(_pin_MotoStep, 0);
   delayMicroseconds(5);
   digitalWrite(_pin_MotoStep, 1);
@@ -108,7 +98,7 @@ void MotoISR(void)
   static char MotoState = LOW;
   if( MotoRun && ((Game.CountDown && !MotoPause) || (DoCalibrate)) )
   {
-    MotoStep(MotoState);
+    MotoStep();
 
     if(MotoDirection==MOTO_DIR_1) MotoPos--;
     else MotoPos++;

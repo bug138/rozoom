@@ -150,8 +150,8 @@ extern GAME Game;
   #define MOTO_MAX_SPEED          800
   #define MOTO_CALIBRATE_SPEED    800
 #else
-  #define MOTO_MAX_SPEED          115
-  #define MOTO_CALIBRATE_SPEED    115
+  #define MOTO_MAX_SPEED          120
+  #define MOTO_CALIBRATE_SPEED    120
 #endif
 #define SPEED_K                 20000
 

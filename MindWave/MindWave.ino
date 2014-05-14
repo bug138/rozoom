@@ -300,13 +300,18 @@ void loop()  //                 M A I N
         else
         if(pressed_button==btn_pause)
         {
+          EVENT("&evt:play_pause");
           GamePause = true;
           MotoRun=false;
         }
         else
         if(pressed_button==btn_resume)
         {
+          EVENT("&evt:play_resume");
           GamePause = false;
+          MotoSpeed.SetFrom=MOTO_MIN_SPEED;
+          MotoSpeed.SetTo=MOTO_MIN_SPEED;
+          MotoSetSpeed();
           MotoRun=true;
        }
         
@@ -421,7 +426,7 @@ void loop()  //                 M A I N
       Game.CountDownEnable=true;
       MotoSpeed.SetFrom=MOTO_START_SPEED;
       ShowGame();
-      EVENT("&evt:play_start,time="+String(Game.PlayTime)+",mode="+String(Game.GameMode)+",mode="+String(Game.GameMode));
+      EVENT("&evt:play_start,time="+String(Game.PlayTime)+",mode="+String(Game.GameMode)+",set="+String(Game.GameSet));
       Timer3.initialize(MOTO_MIN_SPEED);
       LBoard.All.enabled = true;
       MotoRun=true;

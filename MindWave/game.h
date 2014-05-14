@@ -47,7 +47,7 @@ void GameProcess(void)
     else Game.Winner=SENS_2;
     MotoDir(Game.Winner-1);
     MotoSpeed.SetTo=MOTO_MAX_SPEED;
-    MotoSpeed.SetFrom=MotoSpeed.Current;
+    MotoSpeed.SetFrom=MOTO_MIN_SPEED;
     MotoSetSpeed();
     Game.CountDown=1;
 
@@ -165,7 +165,7 @@ signed int calc_shift(int mode,int a1,int a2,int m1,int m2)
     int _r2 = (a2+m2)/2; 
     print7seg(_P1_,(byte)(_r1),false);
     print7seg(_P2_,(byte)(_r2),false);
-    return (_r1-_r2)*2;
+    return (_r1-_r2);
   }
   return 0;
 }
